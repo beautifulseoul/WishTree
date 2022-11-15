@@ -1,0 +1,42 @@
+
+/* fonts*/
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+* {
+    box-sizing: border-box;
+  }
+
+
+
+.login-box {
+    width: 300px;
+    height: 300px;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: center;
+}
+
+
+
+.title {
+    font-family: 'Anton', sans-serif;
+}
+
+.form-control {
+    padding-left: 10px;
+}
+
+.input {
+    width: 200px;
+    height: 40px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    border: 2.2px solid #6e040e ;
+}
+
+.login-btn {
+
+}
