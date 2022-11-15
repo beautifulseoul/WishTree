@@ -37,7 +37,8 @@
         </div>
       </form>
 
-      <!-- Signup -->
+      <!--------------Signup-------------->
+
       <form id="signup_form">
         <div class="form-floating mb-3">
           <input
@@ -47,12 +48,30 @@
             placeholder="Email"
           />
         </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control input"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control input"
+            id="floatingInput"
+            placeholder="닉네임"
+          />
+        </div>
       </form>
+      <!----------------------------------->
 
       <div class="btn-box">
         <button id="signup_btn" class="login-btn">회원가입</button>
-        <button class="login-btn">로그인</button>
+        <button id="login_btn" class="login-btn active">로그인</button>
       </div>
+      <h2 class="link_2_login">&#10094; 로그인 페이지로 돌아가기</h2>
     </div>
     <script src="main.js"></script>
   </body>
