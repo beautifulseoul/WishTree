@@ -37,6 +37,41 @@
     </style>
     <script>
 
+        $(document).ready(function () {
+            set_temp()
+        });
+        function set_temp(){
+            $.ajax({
+                type: "GET",
+                url: "/tree",
+                data: {},
+                success: function (response) {
+                    console.log(response)
+                    for (let i in response['all_id']){
+
+                    let id = response['all_id'][i]['id']
+                    let wishindex = response['all_id'][i]['wishindex']
+                    let img = response['img'][i]
+                        console.log(img, id, wishindex);
+                    let temp=`<div class="col">
+            <div class="card h-100">
+                <img src=${img} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <a href="" class="card-title">${id}'s 트리로 가기</a>
+                    <p class="card-text">${wishindex}개의 소원이 있어요.</p>
+                </div>
+            </div>
+        </div>`
+                        $("#card").append(temp);
+                    }
+
+                    alert(response['msg'])
+                }
+            })
+        }
+
+
+
     </script>
 </head>
 <body>
@@ -44,65 +79,13 @@
 
 </div>
 <div class = 'height'>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">00's 트리로 가기</a>
-                    <p class="card-text">3개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">00's 트리로 가기</a>
-                    <p class="card-text">5개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">00's 트리로 가기</a>
-                    <p class="card-text">10개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">oo's 트리로 가기</a>
-                    <p class="card-text">1개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">00's 트리로 가기</a>
-                    <p class="card-text">3개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">00's 트리로 가기</a>
-                    <p class="card-text">5개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>
+    <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
     </div>
 </div>
   <div class=" flex">
-        <button class="btn btn-outline-dark">나의 트리로 가기</button>
+        <button class="btn btn-outline-dark" onclick = "myTree">나의 트리로 가기</button>
   </div>
+<input type="hidden" id = "myIdIndex" val=${myIdIndex}>
+<input type="hidden" id = "idIndex" val=${idIndex}>
 </body>
 </html>
