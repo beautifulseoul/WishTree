@@ -15,8 +15,6 @@ doc ={
     "wishindex" : 1,
     "wish" : "모르는 사람 도와주기"
 }
-#content > div > div:nth-child(3) > div > div.row-masonry.search-results > div:nth-child(1) > div > div > div > a > img
-#content > div > div:nth-child(3) > div > div.row-masonry.search-results > div:nth-child(2) > div > div > div > a > img
 @app.route('/')
 def home():
     #db.tree.insert_one(doc)
