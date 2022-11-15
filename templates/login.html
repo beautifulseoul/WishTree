@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!--      베낀거-->
+<!--        &lt;!&ndash; Webpage Title &ndash;&gt;-->
+<!--        <title>Hello, world!</title>-->
+
+<!--        &lt;!&ndash; Required meta tags &ndash;&gt;-->
+<!--        <meta charset="utf-8">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+
+<!--        &lt;!&ndash; Bulma CSS &ndash;&gt;-->
+<!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">-->
+<!--        &lt;!&ndash; JS &ndash;&gt;-->
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>-->
+
+
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+
+
+    ></script>
+    <link rel="stylesheet" href="../static/register.css">
+
+     <script>
+            {% if msg %}
+                alert("{{ msg }}")
+            {% endif %}
+            // ['쿠키'라는 개념에 대해 알아봅시다]
+            // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
+            // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.
+            // 쿠키가 있기 때문에, 한번 로그인하면 네이버에서 다시 로그인할 필요가 없는 것입니다.
+            // 브라우저를 닫으면 자동 삭제되게 하거나, 일정 시간이 지나면 삭제되게 할 수 있습니다.
+            function login() {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/login",
+                    data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            $.cookie('mytoken', response['token']);
+                            alert('로그인 완료!')
+                            window.location.href = '/wish'
+                        } else {
+                            // 로그인이 안되면 에러메시지를 띄웁니다.
+                            alert(response['msg'])
+                        }
+                    }
+                })
+            }
+        </script>
+      <script src="../static/register.js"></script>
+
+
+  </head>
+  <body>
+     <div class="login-box">
+      <!-- <img class="tree" src="img/tree.png" alt="" /> -->
+      <h1 class="title">wishtree</h1>
+         <form id="login_form">
+             <div class="form-floating mb-3">
+                 <input
+                         type="email"
+                         class="form-control input"
+                         id="userid"
+                         placeholder="Email"
+                 />
+             </div>
+             <div class="form-floating">
+                 <input
+                         type="password"
+                         class="form-control input"
+                         id="userpw"
+                         placeholder="Password"
+                 />
+             </div>
+         </form>
+
+      <div class="btn-box">
+        <button id="signup_btn" class="login-btn" onclick="location.href='/register'">회원가입</button>
+        <button id="login_btn" class="login-btn active" onclick="login()">로그인</button>
+      </div>
+    </div>
+    <script src="../static/register.js"></script>
+  </body>
+</html>

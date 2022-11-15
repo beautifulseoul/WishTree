@@ -24,7 +24,7 @@ body {
 
 
 .login-box {
-    
+
     max-width: 80%;
     width: 450px;
     height: 35rem;
@@ -85,9 +85,20 @@ input:focus
     border: none;
     color: #fff;
     background-color: #768D7F;
+    transition: 1.5s ease background-color;
 }
 
 /* 애니메이션까지 끝나면 수정. */
 .login-btn:hover {
     background-color: #6e040e;
+}
+
+
+h2 {
+    font-size: 13px;
+    color: #fff;
+}
+
+h2:hover {
+    color: #6e040e;
 }
