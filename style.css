@@ -40,7 +40,7 @@
 
 .mybox2 { /* 입력한 소원들과 체크박스란*/
     width: 95%;
-
+    max-width: 400px;
     padding: 20px;
     box-shadow: 0px 0px 10px 0px lightblue;
     margin: 20px auto;
@@ -80,7 +80,7 @@
 
 .mybtn {
     width: 95%;
-
+    max-width: 400px;
     padding: 0px;
     margin: 20px auto;
 }
