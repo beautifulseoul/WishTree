@@ -122,11 +122,12 @@
                 success: function (response) {
                     let rows = response['wishes']
                     for (let i=0; 0<rows.length; i++) {
-                        console.log(response)
                         let wish = rows[i]['wish']
                         let num = rows[i]['num']
                         let done = rows[i]['done']
+                        let id = rows[i]['id']
 
+                        if(window.location.pathname===id) {
                         let temp_html = ``
                             if (done ==0) {
                                 temp_html = `<li>
@@ -140,6 +141,7 @@
                                             </li>`
                             }
                         $('#wish-list').append(temp_html)
+                            }
                     }
                 }
             });
@@ -161,7 +163,6 @@
         function save_wish() {
             let id = window.location.pathname;
             let wish = $('#wish').val();
-
             $.ajax({
                 type: "POST",
                 url: "/wish",
@@ -170,7 +171,7 @@
                 },
 
                 success: function (response) {
-                    alert(response["msg"])
+                    alert('소원빌기 완료!')
                     window.location.reload()
                 }
             })
@@ -192,18 +193,6 @@
     </div>
     <div style = "position:relative; right:400px;" class="mybox2" id="wish-list">
         <h3>2023년 소원🐰</h3>
-        <li>
-            <h2>✅ 호주에서 스카이다이빙 하기</h2>
-            <button onclick="done_wish(5)" type="button" class="btn btn-outline-primary">완료!</button>
-        </li>
-        <li>
-            <input type="checkbox" id="music" name="interest" value="music" />
-            <h2>개발자로 취업하기!</h2>
-        </li>
-        <li>
-            <input type="checkbox" id="coding" name="interest" value="coding" checked />
-            <label for="coding">건강해지기</label>
-        </li>
     </div>
 
     <div style = "position:relative; left: 50px" class="mybtn" id="go-tree">

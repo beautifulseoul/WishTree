@@ -1,13 +1,15 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
-from bs4 import BeautifulSoup
-import requests
-app = Flask(__name__)
-from pymongo import MongoClient
+from flask import Flask, render_template, jsonify, request, redirect, url_for
+from markupsafe import escape
 
+app = Flask(__name__)
+
+from pymongo import MongoClient
 import certifi
 
 ca = certifi.where()
 
+client = MongoClient('mongodb+srv://test:sparta@cluster0.shbwsw1.mongodb.net/?retryWrites=true&w=majority')
+db = client.dbsparta
 
 SECRET_KEY = 'SPARTA'
 
@@ -18,25 +20,13 @@ import datetime
 import hashlib
 
 
-client = MongoClient('mongodb+srv://nasha:rlar3986!!@cluster0.e9ccedb.mongodb.net/Cluster0?retryWrites=true&w=majority')
-db = client.dbsparta
-doc ={
-    "id" : "c",
-    "password": "c",
-    "name" : "c",
-    "index" : 3,
-    "wishindex" : 1,
-    "wish" : "모르는 사람 도와주기"
-}
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.wishtree.find_one({"id": payload['id']})
-
-        return render_template('wishlist-pg.html', nickname=user_info["nick"])
-
+        return render_template('tree.html', nickname=user_info["nick"])
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -129,25 +119,6 @@ def api_valid():
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
-@app.route('/tree', methods=["GET"])
-def tree():
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-    data = requests.get("https://kr.freepik.com/free-photos-vectors/wish", headers=headers)
-
-    soup = BeautifulSoup(data.text, 'html.parser')                                  #soup (data의 html 가져오기)
-    images = soup.find_all('img', attrs={'class': "min-size-to-snippet"})           #전체 html 에서 class가 min-size-to-snippet인 전체로 이미지 가져오기 ->images는 한줄한줄, img태그, img태그, img태그 형태이다.
-
-    # tt = soup.find('img', attrs={'class': 'min-size-to-snippet'})     # find는 태그 하나만 찾는다.
-    arrayimage = []                                                     # image 값을 담을 배열
-    for image in images:                                                # 반복문을 통해 images 를 image로 떼어낸다.
-        img = image['src']                                              #img태그에서 src 속성을 불러온다.
-        arrayimage.append(img)                                          #반복문 돌때마다 img를 배열에 담는다.
-    all_id = list(db.tree.find({}))                                     #tree db에 있는 정보를 모두 가져와 all_id에 담는다.
-    for i in range(len(all_id)):                                        # range(숫자) : 0부터 숫자-1까지 배열화 시킨다. len(all_id) 배열 all_id의 길이
-        all_id[i]['_id'] = str(all_id[i]['_id'])                        # i번째 all_id의 _id 값을 all_id i번째에 스트링화 시킨다.
-    return jsonify({"all_id": all_id, "img": arrayimage})               # json화 시켜서 클라이언트로 보낸다.
-
-
 @app.route("/wish", methods=["POST"])
 def save_wish():
     wish_receive = request.form['wish_give']
@@ -176,16 +147,14 @@ def wish_done():
     db.wish.update_one({'num': int(num_receive)}, {'$set':{'done':1}})
     return jsonify({'msg': '소원성취!!'})
 
-
-
-@app.route("/lounge/get", methods=["GET"])
+@app.route("/goTree/get", methods=["GET"])
 def set_temp():
     user_list = list(db.wishtree.find({}, {'_id': False}))
     return jsonify({'users':user_list})
 
 @app.route('/<path>')
 def get_path(path):
-    return render_template(path)
+    return render_template(path + '.html')
 
 @app.route('/tree/<id>')
 def get_tree_path(id):
