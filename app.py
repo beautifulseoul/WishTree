@@ -33,8 +33,8 @@ def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        user_info = db.user.find_one({"id": payload['id']})
-        return render_template('index.html', nickname=user_info["nick"])
+        user_info = db.wishtree.find_one({"id": payload['id']})
+        return render_template('wishlist-pg.html', nickname=user_info["nick"])
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -137,7 +137,7 @@ def api_valid():
         soup = BeautifulSoup(data.text, 'html.parser')
 
         images = soup.find_all('img', attrs={'class': "min-size-to-snippet"})
-        tt = soup.find('img', attrs={'class': 'min-size-to-snippet'})
+        #tt = soup.find('img', attrs={'class': 'min-size-to-snippet'})
         arrayimage = []
         for image in images:
             img = image['src']

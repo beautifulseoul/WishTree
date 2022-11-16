@@ -54,14 +54,14 @@
                     let img = response['img'][i]
 
                     let temp=`<div class="col">
-            <div class="card h-100">
-                <img src=${img} class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="" class="card-title">${id}'s 트리로 가기</a>
-                    <p class="card-text">${wishindex}개의 소원이 있어요.</p>
-                </div>
-            </div>
-        </div>`
+                                   <div class="card h-100">
+                                       <img src=${img} class="card-img-top" alt="...">
+                                       <div class="card-body">
+                                           <a href="" class="card-title">${id}'s 트리로 가기</a>
+                                           <p class="card-text">${wishindex}개의 소원이 있어요.</p>
+                                       </div>
+                                   </div>
+                                </div>`
                         $("#card").append(temp);
                     }
 
