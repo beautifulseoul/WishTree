@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><!-- -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,17 +13,125 @@
             crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
+    <!--<link rel="stylesheet" href="style.css"/>-->
 
     <title>Wish List</title>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600&display=swap" rel="stylesheet">
     <style> /* */
+    /* */
+    * { font-family: 'Josefin Slab', serif; }
 
+    .mypic { /* 백그라운드 사진 */
+        width: 100%;
+        height: 200px;
+
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(https://velog.velcdn.com/images/dg6800/post/8a0406a3-451d-4b5a-be90-fb7ea2051d68/image.jpg);
+        background-position: center;
+        background-size: 1500px;
+
+        color: white;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: left;
+    }
+
+    .mypic > h1 { /* 백그라운드 사진안에 글자"Wish List" */
+        font-size: 56px;
+        color: darkturquoise;
+        padding: 100px;
+    }
+
+    .mybox1 { /* 소원적기랑 input 칸*/
+        /* width: 95%;
+        max-width: 400px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px 0px lightblue;
+        margin: 20px auto;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;*/
+        width: 95%;
+        max-width: 400px;
+        margin: 30px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .mybox1 > input { /* */
+        width: 70%;
+    }
+
+    .mybox {
+        width: 95%;
+        padding: 20px;
+        box-shadow: 0px 0px 5px 0px grey;
+        margin: 20px auto;
+
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .mybox > mybox2 { /* 입력한 소원들과 체크박스란*/
+        width: 95%;
+        min-width: 600px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px 0px lightblue;
+        margin: 20px auto;
+    }
+
+    .mybox2 > h3 { /* "2023년 소원"*/
+        font-size: 30px;
+        text-align: left;
+    }
+
+    .mybox2 > li { /* 입력한 소원들 */
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        margin-bottom: 10px;
+        min-height: 10px;
+    }
+
+    .mybox2 > li > h2 {
+        max-width: 75%;
+        font-size: 15px;
+        font-weight: 600;
+        margin-right: auto;
+        margin-bottom: 0px;
+        text-decoration: line-through;
+    }
+
+    .mybox2 > li > h2.done {
+        text-decoration: line-through
+    }
+
+    .mybtn {
+        float: right;
+        padding: 20px;
+        margin-right: 150px;
+
+    }
+
+    .mybox > mytree {
+        width: 95%;
+        max-width: 400px;
+
+    }
     </style>
     <script>
         $(document).ready(function () {
             show_wish();
         });
+
         function show_wish() {
             $.ajax({
                 type: "GET",
@@ -34,6 +142,7 @@
                 }
             });
         }
+
         function save_wish() {
             $.ajax({
                 type: "POST",
@@ -45,6 +154,7 @@
                 }
             });
         }
+
         function done_wish(num) {
             $.ajax({
                 type: "POST",
@@ -59,43 +169,45 @@
 </head>
 <body> <!-- -->
     <div class="mypic">
-        <h1>wish list</h1>
+        <h1 type="text">wish list</h1>
     </div>
     <div class="mybox1">
-
-            <input id="wish" class="form-control" type="text" placeholder="소원 적기">
-            <button onclick="save_wish()" type="button" class="btn btn-outline-primary">에이맨!</button>
-
+        <input id="wish" class="form-control" type="text" placeholder="소원 적기">
+        <button onclick="save_wish()" class="btn btn-outline-primary">에이맨!</button>
     </div>
-    <div class="mybox2" id="wish-list">
-        <h3>2023년 소원🐰</h3>
-        <!--<li>
-            <h2>✅ 호주에서 스카이다이빙 하기</h2>
-            <button onclick="done_wish()" type="button" class="btn btn-outline-primary">완료!</button>
-        </li>-->
-        <li>
-            <input onclick="done_wish()" type="checkbox" name="interest"  />
-            <h2>개발자로 취업하기!</h2>
-        </li>
-        <li>
-            <input onclick="done_wish()" type="checkbox" name="interest" checked />
-            <h2>건강해지기</h2>
-        </li>
+    <div class="mybox">
+        <div class="mybox2" id="wish-list">
+            <h3>2023년 소원🐰</h3>
+            <li>
+                <h2>✅ 건강 하기 </h2>
+                <button onclick="done_wish()" type="text" class="btn btn-outline-primary">완료!</button>
+            </li>
+            <li>
+                <h2>✅ 축구 마스터 </h2>
+                <button onclick="done_wish()" type="" class="btn btn-outline-primary">완료!</button>
+            </li>
+            <li>
+                <h2>✅ 스벅 코딩남 </h2>
+                <button onclick="done_wish()" type="button" class="btn btn-outline-primary">완료!</button>
+            </li>
+            <!--<li>
+                <input onclick="done_wish()" type="checkbox" name="interest" checked />
+                <h2>건강해지기</h2>
+            </li>-->
+        </div><!-- -->
+        <div class="mytree">
+            <img src="https://i.ibb.co/CbQGVm4/tree.png"
+                 alt="Christmas Tree" width="480" height="603">
+        </div>
     </div>
-
-    <div class="mybtn" id="go-tree">
+    <div class="mybtn" id="goTree">
         <button onclick="toOthers()" class="btn btn-secondary">친구 트리 놀러가기</button>
     </div>
-<!-- -->
-    <div>
-        <img src="tree.png"
-             alt="Christmas Tree" width="480" height="603">
-    </div>
-<script>
-    //친구 트리 놀러가기 버튼 누르면 다른 페이지로 이동하는 기능
-    function toOthers() {
-        window.location.href="sample.html";
-    }
-</script>
+    <script>
+        //친구 트리 놀러가기 버튼 누르면 다른 페이지로 이동하는 기능
+        function toOthers() {
+            window.location.href = "sample.html";
+        }
+    </script>
 </body>
 </html>
