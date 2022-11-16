@@ -142,9 +142,9 @@ def tree():
     for image in images:                                                # 반복문을 통해 images 를 image로 떼어낸다.
         img = image['src']                                              #img태그에서 src 속성을 불러온다.
         arrayimage.append(img)                                          #반복문 돌때마다 img를 배열에 담는다.
-    all_id = list(db.tree.find({}))                                     #tree db에 있는 정보를 모두 가져와 all_id에 담는다.
-    for i in range(len(all_id)):                                        # range(숫자) : 0부터 숫자-1까지 배열화 시킨다. len(all_id) 배열 all_id의 길이
-        all_id[i]['_id'] = str(all_id[i]['_id'])                        # i번째 all_id의 _id 값을 all_id i번째에 스트링화 시킨다.
+    all_id = list(db.tree.find({},{'_id': False}))                      #tree db에 있는 정보를 모두 가져와 all_id에 담는다.
+    #for i in range(len(all_id)):                                        # range(숫자) : 0부터 숫자-1까지 배열화 시킨다. len(all_id) 배열 all_id의 길이
+    #    all_id[i]['_id'] = str(all_id[i]['_id'])                        # i번째 all_id의 _id 값을 all_id i번째에 스트링화 시킨다.
     return jsonify({"all_id": all_id, "img": arrayimage})               # json화 시켜서 클라이언트로 보낸다.
 
 
