@@ -12,30 +12,38 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../static/register.css">
+
+    <script>
+       function register() {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/register",
+                    data: {
+                        id_give: $('#userid').val(),
+                        pw_give: $('#userpw').val(),
+                        nickname_give: $('#usernick').val()
+                    },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('회원가입이 완료되었습니다.')
+                            window.location.href = '/login'
+                        } else {
+                            alert(response['msg'])
+                        }
+                    }
+                })
+            }
+    </script>
+
+
+
   </head>
   <body>
-    <div class="login-box">
+     <div class="login-box">
       <!-- <img class="tree" src="img/tree.png" alt="" /> -->
       <h1 class="title">wishtree</h1>
-      <form id="login_form">
-        <div class="form-floating mb-3">
-          <input
-            type="email"
-            class="form-control input"
-            id="floatingInput"
-            placeholder="Email"
-          />
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control input"
-            id="floatingPassword"
-            placeholder="Password"
-          />
-        </div>
-      </form>
+
 
       <!--------------Signup-------------->
 
@@ -44,7 +52,7 @@
           <input
             type="email"
             class="form-control input"
-            id="floatingInput"
+            id="userid"
             placeholder="Email"
           />
         </div>
@@ -52,7 +60,7 @@
           <input
             type="password"
             class="form-control input"
-            id="floatingPassword"
+            id="userpw"
             placeholder="Password"
           />
         </div>
@@ -60,7 +68,7 @@
           <input
             type="text"
             class="form-control input"
-            id="floatingInput"
+            id="usernick"
             placeholder="닉네임"
           />
         </div>
@@ -68,11 +76,10 @@
       <!----------------------------------->
 
       <div class="btn-box">
-        <button id="signup_btn" class="login-btn">회원가입</button>
-        <button id="login_btn" class="login-btn active">로그인</button>
+        <button id="signup_btn" class="login-btn" onclick="register()">회원가입</button>
       </div>
-      <h2 class="link_2_login">&#10094; 로그인 페이지로 돌아가기</h2>
+      <h2 class="link_2_login" onclick="location.href='/login'">&#10094; 로그인 페이지로 돌아가기 </h2>
     </div>
-    <script src="main.js"></script>
+    <script src="../static/register.js"></script>
   </body>
 </html>
