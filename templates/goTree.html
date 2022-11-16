@@ -46,9 +46,8 @@
                 url: "/tree",
                 data: {},
                 success: function (response) {
-                    console.log(response)
-                    for (let i in response['all_id']){
 
+                    for (let i in response['all_id']){
                     let id = response['all_id'][i]['id']
                     let wishindex = response['all_id'][i]['wishindex']
                     let img = response['img'][i]
@@ -64,8 +63,6 @@
                                 </div>`
                         $("#card").append(temp);
                     }
-
-                    alert(response['msg'])
                 }
             })
         }

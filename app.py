@@ -129,24 +129,23 @@ def api_valid():
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
-    @app.route('/tree', methods=["GET"])
-    def tree():
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-        data = requests.get("https://kr.freepik.com/free-photos-vectors/wish", headers=headers)
+@app.route('/tree', methods=["GET"])
+def tree():
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get("https://kr.freepik.com/free-photos-vectors/wish", headers=headers)
 
-        soup = BeautifulSoup(data.text, 'html.parser')
+    soup = BeautifulSoup(data.text, 'html.parser')                                  #soup (data의 html 가져오기)
+    images = soup.find_all('img', attrs={'class': "min-size-to-snippet"})           #전체 html 에서 class가 min-size-to-snippet인 전체로 이미지 가져오기 ->images는 한줄한줄, img태그, img태그, img태그 형태이다.
 
-        images = soup.find_all('img', attrs={'class': "min-size-to-snippet"})
-        #tt = soup.find('img', attrs={'class': 'min-size-to-snippet'})
-        arrayimage = []
-        for image in images:
-            img = image['src']
-            arrayimage.append(img)
-        all_id = list(db.tree.find({}))
-        for i in range(len(all_id)):
-            all_id[i]['_id'] = str(all_id[i]['_id'])
-        return jsonify({"all_id": all_id, "img": arrayimage, "msg": "문제없다!"})
+    # tt = soup.find('img', attrs={'class': 'min-size-to-snippet'})     # find는 태그 하나만 찾는다.
+    arrayimage = []                                                     # image 값을 담을 배열
+    for image in images:                                                # 반복문을 통해 images 를 image로 떼어낸다.
+        img = image['src']                                              #img태그에서 src 속성을 불러온다.
+        arrayimage.append(img)                                          #반복문 돌때마다 img를 배열에 담는다.
+    all_id = list(db.tree.find({}))                                     #tree db에 있는 정보를 모두 가져와 all_id에 담는다.
+    for i in range(len(all_id)):                                        # range(숫자) : 0부터 숫자-1까지 배열화 시킨다. len(all_id) 배열 all_id의 길이
+        all_id[i]['_id'] = str(all_id[i]['_id'])                        # i번째 all_id의 _id 값을 all_id i번째에 스트링화 시킨다.
+    return jsonify({"all_id": all_id, "img": arrayimage})               # json화 시켜서 클라이언트로 보낸다.
 
 
 @app.route("/wish", methods=["POST"])
@@ -186,7 +185,7 @@ def set_temp():
 
 @app.route('/<path>')
 def get_path(path):
-    return render_template(path + '.html')
+    return render_template(path)
 
 @app.route('/tree/<id>')
 def get_tree_path(id):
