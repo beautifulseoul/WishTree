@@ -11,33 +11,45 @@ $.ajax({
     url: "/wish",
     data: {},
     success: function (response) {
+        let rows = response['wish']
+        for(let i = 0; i <rows.length; i++) {
+            let todo = rows[i].wish
+            let temp_html = `<li>
+                                <input className="check" type="checkbox" name="interest"/>
+                                <h4>${todo}</h4>
+                            </li>`
+
+            $('#wish-list').append(temp_html)
+        }
+
     alert(response["msg"]);
     },
 });
 }
 
 function save_wish() {
+    let wish = $('#wish').val()
 $.ajax({
     type: "POST",
     url: "/wish",
-    data: { wish_give: "소원 전송" },
+    data: { wish_give: wish},
     success: function (response) {
-    alert(response["소원 전송됨!"]);
+    alert(response["msg"]);
     window.location.reload();
     },
 });
 }
 
-function done_wish(num) {
-$.ajax({
-    type: "POST",
-    url: "/wish/done",
-    data: { wish_give: "소원 성취" },
-    success: function (response) {
-    alert(response["소원 성취!"]);
-    },
-});
-}
+// function done_wish(num) {
+// $.ajax({
+//     type: "POST",
+//     url: "/wish/done",
+//     data: { wish_give: num },
+//     success: function (response) {
+//     alert(response["소원 성취!"]);
+//     },
+// });
+// }
 
 
 
