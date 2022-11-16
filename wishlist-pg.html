@@ -13,80 +13,12 @@
             crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
 
     <title>Wish List</title>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600&display=swap" rel="stylesheet">
     <style> /* */
-        * {font-family: 'Josefin Slab', serif;}
-        .mypic { /* 백그라운드 사진 */
-            width: 100%;
-            height: 200px;
 
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(roberto-nickson-5PQn41LFsQk-unsplash.jpg);
-            background-position: center;
-            background-size: 1500px;
-
-            color: white;
-
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: left;
-        }
-        .mypic > h1 { /* 백그라운드 사진안에 글자"Wish List" */
-            font-size: 40px;
-            color: darkturquoise;
-            padding: 100px;
-        }
-        .mybox1 { /* 소원적기랑 input 칸*/
-            width: 95%;
-            max-width: 400px;
-            padding: 20px;
-            box-shadow: 0px 0px 10px 0px lightblue;
-            margin: 20px auto;
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .mybox2 { /* 입력한 소원들과 체크박스란*/
-            width: 95%;
-            max-width: 400px;
-            padding: 10px;
-            box-shadow: 0px 0px 10px 0px lightblue;
-            margin: auto;
-        }
-        .mybox2 > h3 { /* "2023년 소원"*/
-            font-size: 30px;
-            text-align: left ;
-        }
-        .mybox1 > input { /* */
-            width: 70%;
-        }
-        .mybox2 > li {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-
-            margin-bottom: 10px;
-            min-height: 10px;
-
-        }
-        .mybox2 > li > h2 {
-            max-width: 75%;
-            font-size: 15px;
-            font-weight: 600;
-            margin-right: auto;
-            margin-bottom: 0px;
-        }
-        .mybox2 > li > h2.done {
-            text-decoration: line-through
-        }
-        .mybtn{
-            padding: 10px;
-        }
     </style>
     <script>
         $(document).ready(function () {
