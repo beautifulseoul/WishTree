@@ -1,88 +1,197 @@
 
     * {
     font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    cursor: default;
     }
-    .mypic {
-    /* 백그라운드 사진 */
-    width: 100%;
-    height: 200px;
 
-    background-image: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0)
-        ),
-        url("https://ih1.redbubble.net/image.1792382553.7255/flat,750x,075,f-pad,750x1000,f8f8f8.jpg");
-    background-position: center;
-    background-size: 1500px;
+    body{
+        background-color: aliceblue;
+        width: 100vw;
+        overflow-x: hidden;
+        margin:0;
+    }
 
-    color: white;
 
+
+/* ------ banner ------ */
+
+
+/* 백그라운드 사진 */
+.mypic {
+background-image: linear-gradient(
+    0deg,
+    rgba(121, 146, 228, 0.705),
+    rgba(0, 0, 0, 0)
+    ),
+    url("https://nationaltoday.com/wp-content/uploads/2020/12/Christmas-Eve-2.jpg");
+background-position: center;
+background-size: cover;
+object-fit: cover;
+
+width: 100%;
+height: 300px;
+
+color: white;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+border-bottom: 3px solid rgb(72, 72, 193);
+
+margin-bottom: 50px;
+}
+
+/* 배너 text box */
+
+.mypic_txt {
+    width: 80%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    }
+    position: relative;
+    top: 80px;
+}
 
-    .mypic > h1 {
+
+/* 배너 txt - left */
+
+.mypic_txt > h1 {
     /* 백그라운드 사진안에 글자"Wish List" */
     font-size: 40px;
     color: darkturquoise;
     text-align: left;
-    }
+}
+    
 
-    .mybox1 {
-    /* 소원적기랑 input 칸*/
-    width: 95%;
-    max-width: 400px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px 0px lightblue;
-    margin: 20px auto;
-
+/* 배너 txt - right */
+.mypic_txt_lo {
+    align-items: right;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    }
-    .mybox2 {
-    /* 입력한 소원들과 체크박스란*/
-    width: 95%;
-    max-width: 400px;
-    padding: 10px;
-    box-shadow: 0px 0px 10px 0px lightblue;
-    margin: auto;
-    }
-    .mybox2 > h3 {
-    /* "2023년 소원"*/
+}
+
+
+/* 배너 txt - right - clock */
+.lo_clock {
+    padding-right: 50px;
     font-size: 30px;
-    text-align: left;
-    }
+}
 
-    .mybox1 > input {
-    width: 70%;
-    }
 
-    .mybox2 > li {
+/* 배너 txt - right - weather */
+.lo_weather {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+}
 
-    margin-bottom: 10px;
-    min-height: 10px;
-    }
+.lo_weather_img {
+    padding-right: 10px;
+}
 
-    .mybox2 > li > h2 {
-    max-width: 75%;
-    font-size: 15px;
-    font-weight: 600;
-    margin-right: auto;
-    margin-bottom: 0px;
-    }
+.lo_weather_icon {
+    width: 80px;
+    height: 80px;
+}
 
-    .mybox2 > li > h2.done {
-    text-decoration: line-through;
-    }
-    .mybtn {
-    padding: 10px;
-    }
+.lo_weather_info {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+/* ------ main: list------ */
+
+main {
+    margin: 20px 80px 0px 80px;
+}
+
+.content-wrap {
+    display: flex;
+}
+
+.main-list {
+    flex-basis: 40%;
+}
+
+
+.mybox1 {
+/* 소원적기랑 input 칸*/
+width: 95%;
+max-width: 500px;
+padding: 20px;
+box-shadow: 0px 0px 10px 0px lightblue;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 30px;
+}
+
+.mybox2 {
+/* 입력한 소원들과 체크박스란*/
+width: 95%;
+max-width: 500px;
+padding: 20px;
+box-shadow: 0px 0px 10px 0px lightblue;
+}
+.mybox2 > h3 {
+/* "2023년 소원"*/
+font-size: 30px;
+text-align: left;
+margin-bottom: 20px;
+}
+
+.mybox1 > input {
+width: 80%;
+}
+
+.mybox2 > li {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: flex-start;
+
+margin-bottom: 14px;
+min-height: 10px;
+}
+
+.mybox2 > li > h4 {
+max-width: 75%;
+font-size: 18px;
+font-weight: 600;
+margin-right: auto;
+margin-bottom: 0px;
+}
+
+.mybox2 > li > h4.done {
+text-decoration: line-through;
+}
+.mybtn {
+padding-top: 30px;
+}
+
+.check {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+
+
+
+/* ------ main: tree ------ */
+
+.main-tree {
+    flex-basis: 60%;
+}
+
+
+.main-tree_img {
+    object-fit: cover;
+    max-width: 60%;
+    margin-left: 200px;
+}
