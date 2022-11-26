@@ -8,7 +8,7 @@ import certifi
 
 ca = certifi.where()
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.shbwsw1.mongodb.net/?retryWrites=true&w=majority')
+client = MongoClient('url')
 db = client.dbsparta
 
 SECRET_KEY = 'SPARTA'
